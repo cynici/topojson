@@ -9,9 +9,7 @@ The sample ENTRYPOINT script *docker-entrypoint.sh* provided uses [gosu](https:/
 
 * docker-compose.yml
 
-Use the example below and tailor it for your needs. Replace the placeholder *{}* with the correct value.
-
-If you're using *docker-entrypoint.sh*, you can override the container runtime numeric user-id to your own by setting the environment variable *RUNUSER_UID* to avoid input/output file permission issue. The script sets the runtime user home directory and current working directory to /data by default. It can be changed using the environment variable *RUNUSER_HOME*.
+Craft your own *docker-compose.yml* by using the example below and tailor it for your needs. Replace the placeholder *{}* with the correct value.
 
 ```
 version: '2'
@@ -33,6 +31,21 @@ services:
     - --out=output.json
     - input.json 
 ```
+
+To use autobuilt image on Docker hub instead of building from Dockerfile, replace
+
+```
+build:
+  context: .
+```
+
+with
+
+```
+image: cheewai/topojson
+```
+
+If you're using *docker-entrypoint.sh*, you can override the container runtime numeric user-id to your own by setting the environment variable *RUNUSER_UID* to avoid input/output file permission issue. The script sets the runtime user home directory and current working directory to /data by default. It can be changed using the environment variable *RUNUSER_HOME*.
 
 In this example, both the input and output files are to be found in *{path_to_data_directory}* (mapped to /data/\* within the container).
 
