@@ -1,7 +1,7 @@
 FROM mhart/alpine-node
-MAINTAINER Cheewai Lai <clai@csir.co.za>
+LABEL maintainer "Cheewai Lai <clai@csir.co.za>"
 
-ARG GOSU_VERSION=1.9
+ARG GOSU_VERSION=1.10
 ARG GOSU_PATH=/usr/bin/gosu
 
 RUN apk update \
@@ -11,3 +11,6 @@ RUN apk update \
  && npm install -g topojson \
  && apk del curl \
  && rm -rf /var/cache/apk/*
+
+ADD docker-entrypoint.sh /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]
